@@ -1,0 +1,112 @@
+@import './variable.less';
+
+.container {
+    margin: 0 auto;
+    width: 1180px;
+}
+.developDoc {
+  padding: 50px 0;
+  .nav-left {
+      width: 200px;
+      position: fixed;
+      top: 80px;
+      left: 114px;
+
+      li {
+        font-size: 16px;
+        background-color: #fff;
+        .toc a {
+          display: block;
+          line-height: 35px;
+          height: 35px;
+          text-decoration: none;
+          padding: 0 30px 0 15px;
+          overflow: hidden;
+          &:hover {
+            color: #6498fb;
+            text-decoration: none;
+            padding-left: 14px;
+            border-left: 1px solid #6498fb;
+          }
+          &.active {
+            color: #6498fb;
+            border-left: 2px solid #6498fb;
+            padding-left: 13px;
+            &:hover {
+              padding-left: 13px;
+            }
+          }
+        }
+        .cate {
+          display: block;
+          height: 35px;
+          line-height: 35px;
+          padding: 0 30px 0 10px;
+          border-left: 2px solid white;
+        }
+        &.current .cate {
+          color: #6498fb;
+          border-left-color: #6498fb;
+        }
+      }
+  }
+  .con {
+      width: 920px;
+      line-height: 25px;
+      margin-left: 260px;
+      padding-top: 40px;
+      display: inline;
+  }
+}
+
+.developDoc .nav-left li .toc {
+    padding: 0 0 10px 0;
+    display: none;
+    font-size: 12px;
+}
+.developDoc .nav-left li .toc a {
+    height: 28px;
+    line-height: 28px;
+}
+.developDoc .nav-left li a {
+    display: block;
+    line-height: 35px;
+    height: 35px;
+    text-decoration: none;
+    padding: 0 30px 0 15px;
+    overflow: hidden;
+}
+
+.developDoc .con .h1t {
+    font-size: 20px;
+    margin: 0;
+    font-weight: normal;
+}
+
+.developDoc .con .h2t {
+    font-size: 16px;
+    margin: 30px 0;
+    font-weight: normal;
+}
+.developDoc .con .h3t {
+    font-size: 14px;
+    font-weight: normal;
+    margin: 30px 0;
+}
+.developDoc .con .tb {
+    border: 1px solid #ddd;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+.developDoc .con .tb th{
+    font-weight: bold;
+}
+.developDoc .con .tb td, .developDoc .con .tb th {
+    border: 1px solid #ddd;
+    padding: 8px 10px;
+    text-align: left;
+}
+.developDoc .con .w {
+    color: #727272;
+}

@@ -1,0 +1,227 @@
+@import './variable.less';
+
+.sec-d {
+    // background-color: #fafafa;
+    .info {
+        padding: 150px 65px 10px;
+
+        h2 {
+            font-size: 32px;
+        }
+        p {
+            font-size: 18px;
+        }
+    }
+
+    .d_box {
+        width: 200px;
+        height: 180px;
+        border-radius: 12px;
+        border: 1px solid #e5e5e5;
+        background-color: #ffffff;
+        transition: box-shadow .1s ease;
+        cursor: default;
+        position: relative;
+
+        &:hover {
+            border: 0;
+            box-shadow: 0 0 10px rgba(0,0,0, 0.294);
+            .wallet_front {
+              opacity: 0;
+            }
+            .wallet_qrcode {
+              opacity: 1;
+            }
+            .dload {
+                color: #ffffff;
+                background-color: #50a9ff;
+                border-radius: 0 0 12px 12px;
+                a {
+                  color: #ffffff;
+                }
+            }
+        }
+
+        .con {
+            p {
+                font-size: 16px;
+            }
+
+            p.til {
+                font-size: 20px;
+                margin-bottom: 10px;
+            }
+
+            p.utime {
+                margin-top: 15px;
+                color: #a0a0a0;
+            }
+            height: 140px;
+            padding: 25px 20px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .dload {
+            font-size: 18px;
+            text-align: center;
+            line-height: 40px;
+            a {
+              color: #a0a0a0;
+              display: block;
+            }
+        }
+
+        .wallet_qrcode {
+          opacity: 0;
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          width: 100%;
+          height: 100%;
+          background: url('@{url}/2.0/wallet_qrcode.png') center no-repeat;
+        }
+    }
+
+    .box-list {
+        margin-top: 40px;
+
+        li {
+            float: left;
+            margin-right: 40px;
+        }
+    }
+}
+
+.down-second {
+    height: 750px;
+
+    .left {
+        float: left;
+    }
+
+    .container {
+        width: 1200px;
+        margin: 0 auto;
+        overflow: hidden;
+        position: relative;
+        padding-left: 150px;
+        top: 175px;
+    }
+
+    .hongbao {
+        width: 255px;
+        // height: 445px;
+        height: 475px;
+        background: url('@{url}/2.0/hongbao.png') center no-repeat;
+        background-size: cover;
+    }
+    .hongbao1 {
+        width: 255px;
+        height: 475px;
+        background: url('@{url}/2.0/hongbao2.png') center no-repeat;
+        background-size: cover;
+    }
+    .hongbao2 {
+        width: 255px;
+        height: 475px;
+        background: url('@{url}/2.0/yy-hongbao.png') center no-repeat;
+        background-size: cover;
+    }
+}
+
+.down-third {
+    height: 700px;
+    background-color: #fafafa;
+    .container {
+        width: 1200px;
+        padding: 0 50px;
+        padding-right: 150px;
+        margin: 0 auto;
+        overflow: hidden;
+        position: relative;
+        top: 125px;
+    }
+
+    .box-list {
+        li {
+            float: right !important;
+            margin: 0 0 0 40px !important;
+        }
+    }
+
+    .hongbao2 {
+        width: 255px;
+        height: 475px;
+        background: url('@{url}/2.0/yy-hongbao.png') center no-repeat;
+        background-size: cover;
+    }
+    .hongbao1 {
+        width: 255px;
+        height: 475px;
+        background: url('@{url}/2.0/hongbao2.png') center no-repeat;
+        background-size: cover;
+    }
+    .wallet {
+        width: 255px;
+        height: 475px;
+        background: url('@{url}/2.0/wallet.png') center no-repeat;
+        background-size: cover;
+    }
+}
+
+.down-four {
+    height: 700px;
+    background-color: #fafafa;
+    .container {
+        width: 1200px;
+        margin: 0 auto;
+        overflow: hidden;
+        position: relative;
+        top: 125px;
+    }
+
+    .wallet {
+        width: 255px;
+        height: 475px;
+        background: url('@{url}/2.0/wallet.png') center no-repeat;
+        background-size: cover;
+    }
+}
+
+.down-back {
+    height: 850px;
+    background-color: #fafafa;
+    .d_box {
+      margin: 5px 10px 10px;
+    }
+    .container {
+        width: 720px;
+        margin: 0 auto;
+        overflow: hidden;
+        position: relative;
+        top: 125px;
+
+        .back-bg {
+            width: 720px;
+            height: 483px;
+            background-image: url("@{url}/2.0/back_bg.png");
+            background-position: 50% 50%;
+            background-repeat: no-repeat;
+        }
+
+        .back-con {
+            width: 380px;
+            font-size: 18px;
+            padding: 68px 0px 0px 10px;
+
+            h2 {
+                margin-bottom: 20px;
+                font-size: 32px;
+            }
+
+            p {
+                line-height: 1.6;
+            }
+        }
+    }
+}

@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>金融魔方：为App一键式接入金融服务</title>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta name="renderer" content="webkit"/>
+<meta name="author" content=""/>
+<meta name="robots" content="all"/>
+<meta name="format-detection" content="telephone=no" />
+<meta name="description" content="金融魔方通过提供金融SDK让每一个APP快速拥有金融服务能力，一键式接入金融SDK，可定制钱包、红包、理财、白条、保险等产品，提高盈利能力，提升运营效率。"/>
+<meta name="keywords" content="金融魔方,金融SDK,云红包,云钱包,云保险,移动SDK,互联网金融解决方案"/>
+<!--[if lt IE9]>
+<script src="//a.jrmf360.com/public/vendor/html5shiv.js?ver=11"></script>
+<![endif]-->
+</head>
+<body>
+  <div class="top-bar-wrapper" id="j-fixed-nav">
+    <div class="row column">
+      <nav class="top-bar nav clearfix">
+        <div class="bar-title">
+          <a href="/">
+            <div class="logo"></div>
+          </a>
+        </div>
+        <div class="bar-left">
+          <ul class="nav-main menu clearfix">
+            <li>
+              <a class="active" href="index.html">首页<span></span></a>
+            </li>
+            <li>
+              <a href="packet.html">产品<span></span></a>
+            </li>
+            <li>
+              <a href="download.html">下载<span></span></a>
+            </li>
+            <li>
+              <a href="">开发文档<span></span></a>
+              <span></span>
+            </li>
+            <li>
+              <a href="about.html">关于我们<span></span></a>
+            </li>
+            <li>
+              <a href="news.html">媒体报道<span></span></a>
+            </li>
+          </ul>
+        </div>
+        <div class="login bar-right">
+          <ul class="menu">
+            <li>
+              <a class="btn-login" href="login.html">登录</a>
+            </li>
+            <li>
+              <a class="button cta hollow-blue t-btn-l" href="emailReg.html">注册</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+<div class="container developDoc clearfix">
+<div class="nav-left">
+	<ul class="list">
+		<li class="">
+			<a href="#云红包Server" class="cate" data-trigger-sub="1">云红包Server API</a>
+			<div class="toc" style="display:none;">
+	            <a href="#1文档概述">文档概述</a>
+	            <a href="#获得用户令牌">获得用户令牌</a>
+	            <a href="#变更用户信息">变更用户信息</a>
+	            <a href="#实名认证接口">实名认证接口</a>
+	            <a href="#添加银行卡验证通过后台自动发送手机验证码">添加银行卡</a>
+	            <a href="#验证银行手机验证码">验证银行手机验证码</a>
+	            <a href="#充值接口">充值接口</a>
+	            <a href="#赎回取现接口">赎回取现接口</a>
+	            <a href="#单聊红包发送">单聊红包发送</a>
+	            <a href="#群组红包发送">群组红包发送</a>
+	            <a href="#红包付款接口">红包付款接口</a>
+	            <a href="#查询银行卡bin信息">查询银行卡bin信息</a>
+	            <a href="#支持的银行列表">支持的银行列表</a>
+	            <a href="#设置交易密码">设置交易密码</a>
+	            <a href="#申请重置交易密码">申请重置交易密码</a>
+	            <a href="#重置交易密码">重置交易密码</a>
+	        </div>
+		</li>
+		<li>
+			<a href="#运营红包Server" class="cate" data-trigger-sub="1">运营红包Server API</a>
+			<div class="toc">
+				<a href="#获取发送唯一红包的请求地址">发送唯一红包</a>
+				<a href="#获取发送普惠红包的请求地址">发送普惠红包</a>
+			</div>
+		</li>
+	</ul>
+</div>
+    <div class="con pull-right">
+        <h1 class="h1t" id="云红包Server">云红包Server API</h1>
+        <h2 class="h2t" id="1文档概述">1.文档概述</h2>
+        <p class="w">本文档针对商户使用接口模式接入魔方科技红包功能进行了详细的描述，商户端程序如需要进行开发可以此文档为依据。</p>
+        <h2 class="h2t" id="2适用范围">2.适用范围</h2>
+        <p class="w">通过接口模式接入魔方科技红包功能的合作商户。</p>
+        <h2 class="h2t" id="3调用方式">3.调用方式</h2>
+        <p class="w">接口采用http/https连接方式进行通讯。</p>
+        <h2 class="h2t" id="4ip限制">4.IP限制</h2>
+        <p class="w">允许对接口的请求IP进行限制。商户在开通时可以向魔方科技提供一个或者多个固定IP用于做交易和查询。</p>
+        <h2 class="h2t" id="5超时时间设定">5.超时时间设定</h2>
+        <p class="w">商户接收魔方科技接口应答的超时时间不得少于60s。</p>
+        <h2 class="h2t" id="6单位说明">6.单位说明</h2>
+        <p class="w">接口中所有交易金额和手续费的货币种类均为人民币，并采用“分”为单位。</p>
+        <h2 class="h2t" id="7域长度计算说明">7.域长度计算说明</h2>
+        <p class="w">所有参数的长度均以字节为单位，每个中文汉字占三个字节，每个英文字母、字符或数字占一个字节。</p>
+        <h2 class="h2t" id="8时间说明">8.时间说明</h2>
+        <p class="w">涉及到时间类型，如果是日期类型格式默认yyyy-MM-dd，如果是时间类型格式默认yyyy-MM-dd HH:mm:ss</p>
+        <h2 class="h2t" id="9加密说明">9.加密说明</h2>
+        <p class="w">涉及到密码加密时，都需要用到秘钥进行加密，参考附件密码加密方法。</p>
+        <h2 class="h2t" id="10签名说明">10.签名说明</h2>
+        <p class="w">1)  以md5作为签名算法</p>
+        <p class="w">2)  签名算法分两步：1. 参数按照字段名的ASCII码从小到大排序；2. 将包含密钥的数据串进行MD5摘要计算，签名结果中的字母统一采用大写形式</p>
+        <p class="w">3)  假设通信密钥为3EDA7B432E238BAD1208BADC65E39B01，则签名sign为：sign=MD5(key1:value1|key2:value2|seckey:3EDA7B432E238BAD1208BADC65E39B01) </p>
+        <h2 class="h2t" id="11请求参数">11.请求参数</h2>
+        <p class="w">所有接口请求时需传递sign（签名字符串）和parterId（分配的商户id）</p>
+        <h2 class="h2t" id="获得用户令牌">获得用户令牌</h2>
+        <p class="w">url：/api/v1/redEnvelope/findUserToken.shtml</p>
+        <p class="w">请求类型:post</p>
+        <h3 class="h3t">表单参数</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th>是否必填</th>
+                 <th style="text-align:left;" width="660">说明</th>
+            </tr>
+            <tr>
+                 <td>partnerId</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>商户分配的id</td>
+            </tr>
+            <tr>
+                 <td>custUid</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>用户 Id，最大长度 64 字节。是用户在 App 中的唯一标识码，必须保证在同一个 App 内不重复，重复的用户 Id 将被当作是同一用户。</td>
+            </tr>
+            <tr>
+                 <td>name</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>用户名称，最大长度 128 字节。（必传）</td>
+            </tr>
+            <tr>
+                 <td>avatarUrl</td>
+                 <td>String</td>
+                 <td>否</td>
+                 <td>用户头像 URI，最大长度 1024 字节</td>
+            </tr>
+        </table>
+        <h3 class="h3t">返回值：</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th style="text-align:left;" width="660">说明</th>
+            </tr>
+            <tr>
+                 <td>respstat</td>
+                 <td>String</td>
+                 <td>0000成功，其他参考返回码表</td>
+            </tr>
+            <tr>
+                 <td>respmsg</td>
+                 <td>String</td>
+                 <td>异常时提示信息</td>
+            </tr>
+            <tr>
+                 <td>userToken</td>
+                 <td>String</td>
+                 <td>用户令牌。App 获取 userToken后，根据情况可选择在 App本地保留当前用户的令牌信息，如果令牌失效，还需要重新向服务器获取userToken。userToken默认永久有效，除非您手动重新获取或者在开发者后台刷新 App Secret 。</td>
+            </tr>
+        </table>
+        <h2 class="h2t" id="变更用户信息">变更用户信息</h2>
+        <p class="w">url：/api/v1/redEnvelope/updateInfo.shtml</p>
+        <p class="w">请求类型:post</p>
+        <h3 class="h3t">表单参数：</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th>是否必填</th>
+                 <th style="text-align:left;"　width="660">说明</th>
+            </tr>
+            <tr>
+                 <td>partnerId</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>商户分配的id</td>
+            </tr>
+            <tr>
+                 <td>userToken</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>用户令牌</td>
+            </tr>
+            <tr>
+                 <td>name</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>用户名称，最大长度 128 字节。（必传）</td>
+            </tr>
+            <tr>
+                 <td>avatarUrl</td>
+                 <td>String</td>
+                 <td>否</td>
+                 <td>用户头像 URI，最大长度 1024 字节</td>
+            </tr>
+        </table>
+        <h3 class="h3t">返回值：</h3>
+        <table class="tb">
+            <tr>
+             <th>名称</th>
+             <th>类型</th>
+             <th>说明</th>
+            </tr>
+            <tr>
+             <td>respstat</td>
+             <td>String</td>
+             <td>0000成功，其他参考返回码表</td>
+            </tr>
+            <tr>
+             <td>respmsg</td>
+             <td>String</td>
+             <td>异常时提示信息</td>
+            </tr>
+        </table>
+        <h2 class="h2t" id="实名认证接口">实名认证接口</h2>
+        <p class="w">url：/api/v1/redEnvelope/certify.shtml</p>
+        <p class="w">请求类型:post</p>
+        <h3 class="h3t">参数：</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th>是否必填</th>
+                 <th>说明</th>
+            </tr>
+            <tr>
+                 <td>partnerId</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>商户分配的id</td>
+            </tr>
+            <tr>
+                 <td>userToken</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>用户令牌</td>
+            </tr>
+            <tr>
+                 <td>realName</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>真实姓名。（必传）</td>
+            </tr>
+            <tr>
+                 <td>identityNo</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>身份证号，必传</td>
+            </tr>
+        </table>
+        <h3 class="h3t">返回值：</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th>说明</th>
+            </tr>
+            <tr>
+                 <td>respstat</td>
+                 <td>String</td>
+                 <td>0000成功，其他参考返回码表</td>
+            </tr>
+            <tr>
+                 <td>respmsg</td>
+                 <td>String</td>
+                 <td>异常时提示信息</td>
+            </tr>
+        </table>
+        <h2 class="h2t" id="添加银行卡验证通过后台自动发送手机验证码">添加银行卡（验证通过后台自动发送手机验证码)</h2>
+        <p class="w">url：/api/v1/redEnvelope/addBankcard.shtml</p>
+        <p class="w">请求类型:post</p>
+        <h3 class="h3t">参数：</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th>是否必填</th>
+                 <th>说明</th>
+            </tr>
+            <tr>
+                 <td>partnerId</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>商户分配的id</td>
+            </tr>
+            <tr>
+                 <td>userToken</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>用户令牌</td>
+            </tr>
+            <tr>
+                 <td>bankNo</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>所在银行卡bin（三位数字，参考银行数据字典）</td>
+            </tr>
+            <tr>
+                 <td>bankCardNo</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>银行卡号</td>
+            </tr>
+            <tr>
+                 <td>mobileNo</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>银行预留手机号</td>
+            </tr>
+        </table>
+        <h3 class="h3t">返回值：</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th>说明</th>
+            </tr>
+            <tr>
+                 <td>respstat</td>
+                 <td>String</td>
+                 <td>0000成功，其他参考返回码表</td>
+            </tr>
+            <tr>
+                 <td>respmsg</td>
+                 <td>String</td>
+                 <td>异常时提示信息</td>
+            </tr>
+            <tr>
+                 <td>mobileToken</td>
+                 <td>String</td>
+                 <td>当respstat=0000时，返回手机令牌</td>
+            </tr>
+        </table>
+        <h2 class="h2t" id="验证银行手机验证码">验证银行手机验证码</h2>
+        <p class="w">url：/api/v1/redEnvelope/addBankcardVailCode.shtml</p>
+        <p class="w">请求类型:post</p>
+        <h3 class="h3t">参数：</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th>是否必填</th>
+                 <th>说明</th>
+            </tr>
+            <tr>
+                 <td>partnerId</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>商户分配的id</td>
+            </tr>
+            <tr>
+                 <td>userToken</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>用户令牌</td>
+            </tr>
+            <tr>
+                 <td>mobileToken</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>手机令牌</td>
+            </tr>
+            <tr>
+                 <td>phoneCode</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>手机验证码</td>
+            </tr>
+        </table>
+        <h3 class="h3t">返回值：</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th>说明</th>
+            </tr>
+            <tr>
+                 <td>respstat</td>
+                 <td>String</td>
+                 <td>0000成功，其他参考返回码表</td>
+            </tr>
+            <tr>
+                 <td>respmsg</td>
+                 <td>String</td>
+                 <td>异常时提示信息</td>
+            </tr>
+        </table>
+        <h2 class="h2t" id="充值接口">充值接口</h2>
+        <p class="w">url：/api/v1/redEnvelope/recharge.shtml</p>
+        <p class="w">请求类型:post</p>
+        <h3 class="h3t">参数：</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th>是否必填</th>
+                 <th>说明</th>
+            </tr>
+            <tr>
+                 <td>partnerId</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>商户分配的id</td>
+            </tr>
+            <tr>
+                 <td>userToken</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>用户令牌</td>
+            </tr>
+            <tr>
+                 <td>bankCardNo</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>银行卡号</td>
+            </tr>
+            <tr>
+                 <td>amount</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>金额，单位分</td>
+            </tr>
+            <tr>
+                 <td>aesTranPwd</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>aes加密后的交易密码，向量用申请的App Secret</td>
+            </tr>
+        </table>
+        <h3 class="h3t">返回值：</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th>说明</th>
+            </tr>
+            <tr>
+                 <td>respstat</td>
+                 <td>String</td>
+                 <td>0000成功，其他参考返回码表</td>
+            </tr>
+            <tr>
+                 <td>respmsg</td>
+                 <td>String</td>
+                 <td>异常时提示信息</td>
+            </tr>
+        </table>
+        <h2 class="h2t" id="赎回取现接口">赎回取现接口</h2>
+        <p class="w">url：/api/v1/redEnvelope/redeem.shtml</p>
+        <p class="w">请求类型:post</p>
+        <h3 class="h3t">参数：</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th>是否必填</th>
+                 <th>说明</th>
+            </tr>
+            <tr>
+                 <td>partnerId</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>商户分配的id</td>
+            </tr>
+            <tr>
+                 <td>userToken</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>用户令牌</td>
+            </tr>
+            <tr>
+                 <td>bankCardNo</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>银行卡号</td>
+            </tr>
+            <tr>
+                 <td>amount</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>金额，单位分</td>
+            </tr>
+            <tr>
+                 <td>aesTranPwd</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>aes加密后的交易密码，向量用申请的App Secret</td>
+            </tr>
+        </table>
+        <h3 class="h3t">返回值：</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th>说明</th>
+            </tr>
+            <tr>
+                 <td>respstat</td>
+                 <td>String</td>
+                 <td>0000成功，其他参考返回码表</td>
+            </tr>
+            <tr>
+                 <td>respmsg</td>
+                 <td>String</td>
+                 <td>异常时提示信息</td>
+            </tr>
+        </table>
+        <h2 class="h2t" id="单聊红包发送">单聊红包发送</h2>
+        <p class="w">url：/api/v1/redEnvelope/single.shtml</p>
+        <p class="w">请求类型:post</p>
+        <h3 class="h3t">参数：</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th>是否必填</th>
+                 <th>说明</th>
+            </tr>
+            <tr>
+                 <td>partnerId</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>商户分配的id</td>
+            </tr>
+            <tr>
+                 <td>userToken</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>用户令牌</td>
+            </tr>
+            <tr>
+                 <td>money</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>红包金额，单位分</td>
+            </tr>
+            <tr>
+                 <td>summary</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>红包描述</td>
+            </tr>
+            <tr>
+                 <td>receiveUserid</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>红包接受者Id</td>
+            </tr>
+        </table>
+        <h3 class="h3t">返回值：</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th>说明</th>
+            </tr>
+            <tr>
+                 <td>respstat</td>
+                 <td>String</td>
+                 <td>0000成功，其他参考返回码表</td>
+            </tr>
+            <tr>
+                 <td>respmsg</td>
+                 <td>String</td>
+                 <td>异常时提示信息</td>
+            </tr>
+            <tr>
+                 <td>envelopeId</td>
+                 <td>String</td>
+                 <td>当respstat==0000时，返回生成的红包id</td>
+            </tr>
+            <tr>
+                 <td>balance</td>
+                 <td>String</td>
+                 <td>当respstat==0000时，返回用户余额</td>
+            </tr>
+            <tr>
+                 <td>isSupportMulCard</td>
+                 <td>String</td>
+                 <td>当respstat==0000时，返回是否支持多卡</td>
+            </tr>
+            <tr>
+                 <td>myBankcards</td>
+                 <td>List</td>
+                 <td>当respstat==0000时，返回用户现有银行卡列表</td>
+            </tr>
+        </table>
+        <h2 class="h2t" id="群组红包发送">群组红包发送</h2>
+        <p class="w">url：/api/v1/redEnvelope/group.shtml</p>
+        <p class="w">请求类型:post</p>
+        <h3 class="h3t">参数：</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th>是否必填</th>
+                 <th>说明</th>
+            </tr>
+            <tr>
+                 <td>partnerId</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>商户分配的id</td>
+            </tr>
+            <tr>
+                 <td>userToken</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>用户令牌</td>
+            </tr>
+            <tr>
+                 <td>redEnvelopeType</td>
+                 <td>int</td>
+                 <td>是</td>
+                 <td>红包类型（1，随机红包，2，等额红包）</td>
+            </tr>
+            <tr>
+                 <td>money</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>如果是随机红包，传红包总额；如果是等额红包，传单个红包金额，单位分</td>
+            </tr>
+            <tr>
+                 <td>summary</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>红包描述</td>
+            </tr>
+            <tr>
+                 <td>number</td>
+                 <td>int</td>
+                 <td>是</td>
+                 <td>红包个数</td>
+            </tr>
+            <tr>
+                 <td>groupId</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>红包群id</td>
+            </tr>
+        </table>
+        <h3 class="h3t">返回值：</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th>说明</th>
+            </tr>
+            <tr>
+                 <td>respstat</td>
+                 <td>String</td>
+                 <td>0000成功，其他参考返回码表</td>
+            </tr>
+            <tr>
+                 <td>respmsg</td>
+                 <td>String</td>
+                 <td>异常时提示信息</td>
+            </tr>
+            <tr>
+                 <td>envelopeId</td>
+                 <td>String</td>
+                 <td>当respstat==0000时，返回生成的红包id</td>
+            </tr>
+            <tr>
+                 <td>balance</td>
+                 <td>String</td>
+                 <td>当respstat==0000时，返回用户余额</td>
+            </tr>
+            <tr>
+                 <td>isSupportMulCard</td>
+                 <td>String</td>
+                 <td>当respstat==0000时，返回是否支持多卡</td>
+            </tr>
+            <tr>
+                 <td>myBankcards</td>
+                 <td>List</td>
+                 <td>当respstat==0000时，返回用户现有银行卡列表</td>
+            </tr>
+        </table>
+        <h2 class="h2t" id="红包付款接口">红包付款接口</h2>
+        <p class="w">url：/api/v1/redEnvelope/pay.shtml</p>
+        <p class="w">请求类型:post</p>
+        <h3 class="h3t">参数：</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th>是否必填</th>
+                 <th>说明</th>
+            </tr>
+            <tr>
+                 <td>partnerId</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>商户分配的id</td>
+            </tr>
+            <tr>
+                 <td>userToken</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>用户令牌</td>
+            </tr>
+            <tr>
+                 <td>paytype</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>支付类型， 0 余额支付，1 银行卡支付</td>
+            </tr>
+            <tr>
+                 <td>bankCardNo</td>
+                 <td>String</td>
+                 <td>否</td>
+                 <td>银行卡号，当paytype=1时，传递</td>
+            </tr>
+            <tr>
+                 <td>envelopeId</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>红包id</td>
+            </tr>
+            <tr>
+                 <td>aesTranPwd</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>aes加密后的交易密码，向量用申请的App Secret</td>
+            </tr>
+        </table>
+        <h3 class="h3t">返回值：</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th>说明</th>
+            </tr>
+            <tr>
+                 <td>respstat</td>
+                 <td>String</td>
+                 <td>0000成功，其他参考返回码表</td>
+            </tr>
+            <tr>
+                 <td>respmsg</td>
+                 <td>String</td>
+                 <td>异常时提示信息</td>
+            </tr>
+        </table>
+        <h2 class="h2t" id="查询银行卡bin信息">查询银行卡bin信息</h2>
+        <p class="w">url：/api/v1/redEnvelope/searchCardbin.shtml</p>
+        <p class="w">请求类型:post</p>
+        <h3 class="h3t">参数：</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th>是否必填</th>
+                 <th>说明</th>
+            </tr>
+            <tr>
+                 <td>partnerId</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>商户分配的id</td>
+            </tr>
+            <tr>
+                 <td>bankCardNo</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>银行卡号</td>
+            </tr>
+        </table>
+        <h3 class="h3t">返回值：</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th>说明</th>
+            </tr>
+            <tr>
+                 <td>respstat</td>
+                 <td>String</td>
+                 <td>0000成功，其他参考返回码表</td>
+            </tr>
+            <tr>
+                 <td>respmsg</td>
+                 <td>String</td>
+                 <td>异常时提示信息</td>
+            </tr>
+            <tr>
+                 <td>dcType</td>
+                 <td>int</td>
+                 <td>0：储蓄卡； 1：信用卡</td>
+            </tr>
+            <tr>
+                 <td>bankNo</td>
+                 <td>String</td>
+                 <td>当respstat==0000时，返回银行卡bin</td>
+            </tr>
+            <tr>
+                 <td>bankName</td>
+                 <td>String</td>
+                 <td>当respstat==0000时，返回银行名称</td>
+            </tr>
+        </table>
+        <h2 class="h2t" id="支持的银行列表">支持的银行列表</h2>
+        <p class="w">url：/api/v1/redEnvelope/banklist.shtml</p>
+        <p class="w">请求类型:post</p>
+        <h3 class="h3t">参数：</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th>是否必填</th>
+                 <th>说明</th>
+            </tr>
+            <tr>
+                 <td>partnerId</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>商户分配的id</td>
+            </tr>
+        </table>
+        <h3 class="h3t">返回值：</h3>
+        <table class="tb">
+            <tr>
+             <th>名称</th>
+             <th>类型</th>
+             <th>说明</th>
+            </tr>
+            <tr>
+                 <td>respstat</td>
+                 <td>String</td>
+                 <td>0000成功，其他参考返回码表</td>
+            </tr>
+            <tr>
+                 <td>respmsg</td>
+                 <td>String</td>
+                 <td>异常时提示信息</td>
+            </tr>
+            <tr>
+                 <td>bankList</td>
+                 <td>List</td>
+                 <td>支持的银行列表</td>
+            </tr>
+        </table>
+        <h2 class="h2t" id="设置交易密码">设置交易密码</h2>
+        <p class="w">url：/api/v1/redEnvelope/setTradePwd.shtml</p>
+        <p class="w">请求类型:post</p>
+        <h3 class="h3t">参数：</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th>是否必填</th>
+                 <th>说明</th>
+            </tr>
+            <tr>
+                 <td>partnerId</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>商户分配的id</td>
+            </tr>
+            <tr>
+                 <td>userToken</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>用户令牌</td>
+            </tr>
+            <tr>
+                 <td>aesTranPwd</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>aes加密后的交易密码，向量用申请的App Secret</td>
+            </tr>
+        </table>
+        <h3 class="h3t">返回值：</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th>说明</th>
+            </tr>
+            <tr>
+                 <td>respstat</td>
+                 <td>String</td>
+                 <td>0000成功，其他参考返回码表</td>
+            </tr>
+            <tr>
+                 <td>respmsg</td>
+                 <td>String</td>
+                 <td>异常时提示信息</td>
+            </tr>
+        </table>
+        <h2 class="h2t" id="申请重置交易密码">申请重置交易密码</h2>
+        <p class="w">url：/api/v1/redEnvelope/applyResetTranPwd.shtml</p>
+        <p class="w">请求类型:post</p>
+        <h3 class="h3t">参数：</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th>是否必填</th>
+                 <th>说明</th>
+            </tr>
+            <tr>
+                 <td>partnerId</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>商户分配的id</td>
+            </tr>
+            <tr>
+                 <td>userToken</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>用户令牌</td>
+            </tr>
+            <tr>
+                 <td>realName</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>真实姓名。（必传）</td>
+            </tr>
+            <tr>
+                 <td>identityNo</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>身份证号，必传</td>
+            </tr>
+            <tr>
+                 <td>mobileNo</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>之前绑定的手机号</td>
+            </tr>
+        </table>
+        <h3 class="h3t">返回值：</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th>说明</th>
+            </tr>
+            <tr>
+                 <td>respstat</td>
+                 <td>String</td>
+                 <td>0000成功，其他参考返回码表</td>
+            </tr>
+            <tr>
+                 <td>respmsg</td>
+                 <td>String</td>
+                 <td>异常时提示信息</td>
+            </tr>
+            <tr>
+                 <td>mobileToken</td>
+                 <td>String</td>
+                 <td>当respstat=0000时，返回手机令牌</td>
+            </tr>
+        </table>
+        <h2 class="h2t" id="重置交易密码">重置交易密码</h2>
+        <p class="w">url：/api/v1/redEnvelope/resetTranPwd.shtml</p>
+        <p class="w">请求类型:post</p>
+        <h3 class="h3t">参数：</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th>是否必填</th>
+                 <th>说明</th>
+            </tr>
+            <tr>
+                 <td>partnerId</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>商户分配的id</td>
+            </tr>
+            <tr>
+                 <td>userToken</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>用户令牌</td>
+            </tr>
+            <tr>
+                 <td>mobileToken</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>手机令牌</td>
+            </tr>
+            <tr>
+                 <td>phoneCode</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>手机验证码</td>
+            </tr>
+            <tr>
+                 <td>aesTranPwd</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>aes加密后的交易密码，向量用申请的App Secret</td>
+            </tr>
+        </table>
+        <h3 class="h3t">返回值：</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th>说明</th>
+            </tr>
+            <tr>
+                 <td>respstat</td>
+                 <td>String</td>
+                 <td>0000成功，其他参考返回码表</td>
+            </tr>
+            <tr>
+                 <td>respmsg</td>
+                 <td>String</td>
+                 <td>异常时提示信息</td>
+            </tr>
+        </table>
+        <br>
+        <h1 class="h1t" id="运营红包Server">运营红包Server API</h1>
+        <h2 class="h2t" id="获取发送唯一红包的请求地址">获取发送唯一红包的请求地址</h2>
+        <p class="w">url：/api/v1/redEnvelope/getOperateRedEnvelopeUrl.shtml</p>
+        <p class="w">请求类型:post</p>
+        <h3 class="h3t">参数：</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th>是否必填</th>
+                 <th>说明</th>
+            </tr>
+             <tr>
+                 <td>partnerId</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>商户分配的id</td>
+            </tr>
+            <tr>
+                 <td>webToken</td>
+                 <td>String</td>
+                 <td>否</td>
+                 <td>用户令牌</td>
+            </tr>
+            <tr>
+                 <td>triggerId</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>红包应用场景id</td>
+            </tr>
+            <tr>
+                 <td>uniqueID</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>设备唯一标识</td>
+            </tr>
+        </table>
+         <h3 class="h3t">返回值：</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th>说明</th>
+            </tr>
+            <tr>
+                 <td>respstat</td>
+                 <td>String</td>
+                 <td>0000成功，其他参考返回码表</td>
+            </tr>
+            <tr>
+                 <td>respmsg</td>
+                 <td>String</td>
+                 <td>异常时提示信息</td>
+            </tr>
+            <tr>
+                 <td>redEnvelopeUrl</td>
+                 <td>String</td>
+                 <td>返回H5的红包url</td>
+            </tr>
+            <tr>
+                 <td>requestParams</td>
+                 <td>Map</td>
+                 <td>返回H5的红包的部分请求参数</td>
+            </tr>
+        </table>
+        <h2 class="h2t" id="获取发送普惠红包的请求地址">获取发送普惠红包的请求地址</h2>
+        <p class="w">url：/api/v1/redEnvelope/getCommonRedEnvelopeUrl.shtml</p>
+        <p class="w">请求类型:post</p>
+        <h3 class="h3t">参数：</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th>是否必填</th>
+                 <th>说明</th>
+            </tr>
+             <tr>
+                 <td>partnerId</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>商户分配的id</td>
+            </tr>
+            <tr>
+                 <td>triggerId</td>
+                 <td>String</td>
+                 <td>是</td>
+                 <td>红包应用场景id</td>
+            </tr>
+        </table>
+         <h3 class="h3t">返回值：</h3>
+        <table class="tb">
+            <tr>
+                 <th>名称</th>
+                 <th>类型</th>
+                 <th>说明</th>
+            </tr>
+            <tr>
+                 <td>respstat</td>
+                 <td>String</td>
+                 <td>0000成功，其他参考返回码表</td>
+            </tr>
+            <tr>
+                 <td>respmsg</td>
+                 <td>String</td>
+                 <td>异常时提示信息</td>
+            </tr>
+            <tr>
+                 <td>redEnvelopeUrl</td>
+                 <td>String</td>
+                 <td>返回H5的红包url</td>
+            </tr>
+            <tr>
+                 <td>requestParams</td>
+                 <td>Map</td>
+                 <td>返回H5的红包的部分请求参数</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<footer class="inc-footer">
+  <div class="focus">
+    <div class="left">
+      <h2 class="title">优质产品</h2>
+      <ul>
+        <li><a href="">云红包</a></li>
+        <li><a href="">云保险</a></li>
+        <li><a href="">云钱包</a></li>
+        <li><a href="">理财超市</a></li>
+      </ul>
+    </div>
+    <div class="center" style="position:relative;">
+      <h2 class="title">联系我们</h2>
+      <ul>
+        <li>联系电话: 010-88312877-8045</li>
+        <li>商务合作：hz@yilucaifu.com</li>
+        <li>公司地址: 北京西城区阜成门大街2号万通新世界广场A座22层2208</li>
+        <li>企业公众号：
+          <span class="wechat__logo">微信 ></span>
+          <div class="wechat"></div>
+        </li>
+      </ul>
+    </div>
+    <div class="right">
+      <h2 class="title">帮助与支持</h2>
+      <ul>
+        <li>
+          <a href="">开发者文档</a>
+        </li>
+        <li>
+          <a href="">关于我们</a>
+        </li>
+        <li>版本说明文档（后续开发中...）</li>
+      </ul>
+    </div>
+  </div>
+  <div class="hr"></div>
+  <div class="copy">
+    <p>
+      版权所有©北京一路魔方科技有限公司     京ICP备16020273号-1
+    </p>
+    <p>一路财富旗下公司</p>
+  </div>
+</footer>
+</body>
+</html>

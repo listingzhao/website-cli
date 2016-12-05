@@ -1,0 +1,77 @@
+@import './variable.less';
+
+.price {
+  ul {
+    width: 300px !important;
+  }
+}
+
+.sec-price {
+  width: 100%;
+  // background-color: #fafafa;
+
+  .container {
+      width: 1200px;
+      margin: 0 auto;
+      padding-bottom: 180px;
+  }
+
+  .desc {
+    padding: 0 100px;
+    font-size: 18px;
+    p {
+      // line-height: 2;
+      margin-bottom: 10px;
+      padding-left: 30px;
+      position: relative;
+      span {
+        font-weight: bold;
+      }
+    }
+    .reg {
+      color: #00c9ff;
+      transition: all .2s ease;
+      &:hover {
+        border-bottom: 1px solid #00c9ff;
+      }
+    }
+    .number {
+      position: absolute;
+      left: 0;
+      top: 3px;
+      font-weight: normal;
+      display: inline-block;
+      color: #ffffff;
+      text-align: center;
+      line-height: 20px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: #23c6c8;
+    }
+  }
+
+  .price-til {
+    // font-family: "webfont";
+    padding: 0 80px;
+    h2 {
+      font-size: 40px;
+      margin-bottom: 25px;
+    }
+    font-size: 32px;
+  }
+  .price-bg {
+    margin: 0 auto;
+    width: 1100px;
+    height: 2800px;
+    background: url('@{url}/2.0/hongbao_price.png') center no-repeat;
+    background-size: 100%;
+  }
+  .wallet_price {
+    margin: 0 auto;
+    width: 1100px;
+    height: 2800px;
+    background: url('@{url}/2.0/wallet_price.png') center no-repeat;
+    background-size: 100%;
+  }
+}

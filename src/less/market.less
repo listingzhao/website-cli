@@ -1,0 +1,210 @@
+@import './variable.less';
+
+
+.market-banner {
+  .main {
+    background: url('@{url}/2.0/market_banner.png') center no-repeat;
+    // background-position-x: 80%;
+    background-position-y: 35%;
+    height: 840px;
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .reg-info {
+    position: absolute;
+    top: 255px;
+    right: 175px;
+  }
+  .iconwall {
+    width: 80%;
+    left: 50%;
+    transform: translate(-50%,0);
+    position: absolute;
+    bottom: 30px;
+  }
+  .iconwall-item {
+    width: 25%;
+    float: left;
+    text-align: center;
+    font-size: 16px;
+    position: relative;
+    color: #37444d;
+
+    .icon-til {
+
+    }
+    .iconfont {
+      font-size: 45px;
+    }
+  }
+}
+
+.orbit,
+.orbit-container {
+    position: relative;
+}
+
+.sec-market-third .orbit-slide {
+    height: 400px;
+    overflow: hidden;
+    position: relative;
+    transition-timing-function: cubic-bezier(.19,1,.22,1);
+    transition-duration: 100s;
+    animation-timing-function: cubic-bezier(.19,1,.22,1);
+    animation-duration:1s;
+    width: 100%;
+
+    &:after {
+        content: " ";
+        width: 100%;
+        height: 400px;
+        background: rgba(0,0,0,.4);
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+}
+
+.sec-market-third {
+  width: 100%;
+  height: 400px;
+  .orbit-container {
+    height: 400px;
+    overflow: hidden;
+  }
+
+  .slide-content {
+      // font-family: "webfont";
+      font-size: 32px;
+      text-align: center;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      color: #fff;
+      z-index: 2;
+      p {
+        font-weight: 200;
+      }
+  }
+
+  .orbit-image {
+      height: 100%;
+      width: 100%;
+      background-size: cover;
+      background-position: 50%;
+
+      &.manager {
+          background-image: url('@{url}/2.0/market_small_0.jpg');
+      }
+
+      &.product {
+          background-image: url('@{url}/2.0/market_small_1.jpg');
+      }
+
+      &.partner {
+          background-image: url('@{url}/2.0/market_small_2.jpg');
+      }
+  }
+  .orbit-bullets {
+    width: 60px;
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translate(-50%,0);
+    z-index: 9;
+    ul {
+      li {
+        color: #bfbfbf;
+        width: 10px;
+        height: 10px;
+        font-size: 20px;
+        margin: 0 5px;
+        float: left;
+        cursor: pointer;
+        background: url('@{url}/2.0/1.png') no-repeat;
+        background-size: cover;
+        &.is-active {
+          background: url('@{url}/2.0/2.png') no-repeat;
+          background-size: cover;
+        }
+      }
+    }
+  }
+}
+
+.sec-market-fea {
+  width: 100%;
+  min-width:1200px;
+  height: 1070px;
+  background: url('@{url}/2.0/market_seed.png') center -90px no-repeat,-webkit-linear-gradient(bottom,#fafaf5,#dee8d0);
+  position: relative;
+  // background: -webkit-linear-gradient(bottom,#fafaf5,#fafafa);
+  // background: -moz-linear-gradient(bottom,#fafaf5,#fafafa);
+  .main {
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    height: 100%;
+  }
+  .con {
+    font-size: 20px;
+    .con-title {
+      font-size: 30px;
+      font-weight: 200;
+    }
+    p {
+      font-weight: 200;
+    }
+  }
+  .info1 {
+    text-align: right;
+    width: 350px;
+    position: absolute;
+    top:230px;
+
+  }
+  .info2 {
+    width: 355px;
+    text-align: left;
+    position: absolute;
+    top:185px;
+    right: 3%;
+  }
+  .info3 {
+    width: 355px;
+    text-align: center;
+    position: absolute;
+    top:620px;
+    left: 106px;
+  }
+  .info4 {
+    width: 355px;
+    text-align: left;
+    position: absolute;
+    top:555px;
+    right: 3%;
+  }
+  .lines {
+    position: absolute;
+    top: 206px;
+    left: 255px;
+    width: 545px;
+    height: 438px;
+    background: url('@{url}/2.0/market_line.png') center no-repeat;
+  }
+  .title {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 120px;
+    font-size: 30px;
+    font-weight: 200;
+    .amount {
+      font-size: 50px;
+      font-weight: 200;
+    }
+  }
+}

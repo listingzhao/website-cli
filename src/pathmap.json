@@ -1,0 +1,13 @@
+{
+    "zepto": "js/lib/zepto",
+
+    "slide": "js/lib/jquery.SuperSlide",
+
+    "base": "js/base",
+
+    "reactStuff": "dll/js/reactStuff",
+
+    "commonCss": "css/common.css",
+
+    "webpackLogo": "img/webpack.png"
+}
