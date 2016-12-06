@@ -1,5 +1,7 @@
 /node_modules
+/dist
 /public
+/views
 /.sass-cache
 ./npm-debug.log
 .DS_Store

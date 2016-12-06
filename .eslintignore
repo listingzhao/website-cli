@@ -1,0 +1,7 @@
+bin/*.js
+config/*.js
+plugin/*.js
+src/js/lib/*.js
+src/js/*.js
+src/js/helpers/*.js
+src/js/utils/*.js

@@ -30,7 +30,6 @@ module.exports = (router, app, staticDir) => {
     });
 
     // proxy api
-    router.get('/api/foo/bar', proxy({host: 'http://foo.bar.com'}));
 
     router.post('/passport/existUserByEmail.html', proxy({url: 'http://192.168.30.72:8080/mfkj-web/passport/existUserByEmail.html'}));
 

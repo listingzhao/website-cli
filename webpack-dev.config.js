@@ -5,7 +5,7 @@
 * @Last Modified time: 2016-02-04 14:24:50
 */
 
-'use strict';
+'use strict'
 
 let genConf = require('./make-webpack.config')
 

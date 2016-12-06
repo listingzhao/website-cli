@@ -1,8 +1,8 @@
-'use strict';
+'use strict'
 
-const path = require('path');
-const fs = require('fs');
-const gcf = require('./gcf');
+const path = require('path')
+const fs = require('fs')
+const gcf = require('./gcf')
 function CompHtmlPlugin(options) {}
 
 var compArray = {};

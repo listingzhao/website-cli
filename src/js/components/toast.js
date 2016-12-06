@@ -5,14 +5,14 @@
 * @Last Modified time: 2015-08-18 20:44:05
 */
 
-'use strict';
+'use strict'
 
 // require('../../css/components/toast.css');
 
-console.info('require toast module.');
+console.info('require toast module.')
 
-function Toast() {
+function Toast () {
     // todo
 }
 
-module.exports = Toast;
+module.exports = Toast

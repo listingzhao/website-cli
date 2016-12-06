@@ -5,12 +5,12 @@
 * @Last Modified time: 2015-08-05 01:38:59
 */
 
-'use strict';
+'use strict'
 
-console.info('require mask module.');
+console.info('require mask module.')
 
-function mask() {
+function mask () {
     // todo
 }
 
-module.exports = mask;
+module.exports = mask

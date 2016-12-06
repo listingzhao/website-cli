@@ -1,8 +1,8 @@
 'use strict';
 
 const path = require('path')
-const AssetsPlugin = require('assets-webpack-plugin')
-const assetsPluginInstance = new AssetsPlugin({filename: 'assets.json'})
+// const AssetsPlugin = require('assets-webpack-plugin')
+// const assetsPluginInstance = new AssetsPlugin({filename: 'assets.json'})  assets 文件输出路径json文件
 const fs = require('fs')
 
 const webpack = require('webpack')
@@ -23,10 +23,10 @@ const srcDir = path.resolve(process.cwd(), 'src')
 const assets = path.resolve(process.cwd(), 'assets')
 const nodeModPath = path.resolve(__dirname, './node_modules')
 const pathMap = require('./src/pathmap.json')
-const outputDir = 'assets'
+const outputDir = 'public'
 let entries = (() => {
     let jsDir = path.resolve(srcDir, 'js')
-    let entryFiles = glob.sync(jsDir + '/*.{js,jsx}')
+    let entryFiles = glob.sync(jsDir + '/*.js')
     let map = {}
 
     entryFiles.forEach((filePath) => {
@@ -90,31 +90,11 @@ module.exports = (options) => {
           r.push(new HtmlWebpackPlugin(conf))
           r.push(new CompHtmlPlugin({options: true}))
         })
-        // entryHtml.forEach((filePath) => {
-        //     let filename = filePath.substring(filePath.lastIndexOf('\/') + 1, filePath.lastIndexOf('.'))
-        //     // console.log('filePath:' + filePath);'../views/' +
-        //     let conf = {
-        //         template: 'ejs!' + filePath,
-        //         filename: filename + '.html'
-        //     }
-        //
-        //     if (filename in entries) {
-        //         conf.inject = 'body'
-        //         conf.chunks = ['base', 'vender', 'common', filename]
-        //     }
-        //
-        //     if ('b' === filename || 'c' === filename)
-        //         conf.chunks.splice(2, 0, 'common-b-c')
-        //         // dll打包过的库，只能通过script标签引入？？
-        //     // if('react-demo' === filename) conf.chunks.splice(2, 0, 'reactStuff')
-        //     // console.log(conf);
-        //     r.push(new HtmlWebpackPlugin(conf))
-        // })
 
         return r
     })()
 
-    // 没有真正引用也会加载到runtime，如果没安装这些模块会导致报错，有点坑
+    // 加载到runtime
     plugins.push(
         new webpack.ProvidePlugin({
             _: 'lodash', // 按需引用
@@ -123,20 +103,15 @@ module.exports = (options) => {
         })
     )
     // assetsPluginInstance
-    plugins.push(assetsPluginInstance)
+    // plugins.push(assetsPluginInstance)
 
     if (dev) {
         extractCSS = new ExtractTextPlugin('assets/css/[name].css?[contenthash]')
         cssLoader = extractCSS.extract('style', 'css!postcss')
-        // sassLoader = extractCSS.extract('style', ['css', 'postcss', 'sass'])
         sassLoader = extractCSS.extract('style', 'css!postcss!sass')
-        // lessLoader = extractCSS.extract('style', ['css','postcss','less'])
         lessLoader = extractCSS.extract('style', 'css!postcss!less')
         plugins.push(extractCSS, new webpack.HotModuleReplacementPlugin())
-        // var info = autoprefixer({ browsers: ['last 1 version'] }).info();
-        // console.log(info);
     } else {
-        //[contenthash:8].[name].min.css
         extractCSS = new ExtractTextPlugin(outputDir + '/css/[name]-[chunkhash:8].css', {
             // 当allChunks指定为false时，css loader必须指定怎么处理
             // additional chunk所依赖的css，即指定`ExtractTextPlugin.extract()`
@@ -144,11 +119,8 @@ module.exports = (options) => {
             // @see https://github.com/webpack/extract-text-webpack-plugin
             allChunks: false
         })
-        // cssLoader = extractCSS.extract('style', ['css?minimize'])
         cssLoader = extractCSS.extract('style', 'css?minimize!postcss')
-        // sassLoader = extractCSS.extract('style', ['css?minimize', 'sass'])
         sassLoader = extractCSS.extract('style', 'css?minimize!postcss!sass')
-        // lessLoader = extractCSS.extract('style', ['css?minimize', 'less'])
         lessLoader = extractCSS.extract('style', 'css?minimize!postcss!less')
         plugins.push(extractCSS, new UglifyJsPlugin({
             compress: {
@@ -168,19 +140,18 @@ module.exports = (options) => {
             }
         }),
         // new AssetsPlugin({
-        //     filename: path.resolve(assets, 'source-map.json')
+        //     filename: path.resolve(public, 'source-map.json')
         // }),
         new webpack.optimize.DedupePlugin(), new webpack.NoErrorsPlugin())
     }
 
     let config = {
         entry: Object.assign(entries, {
-            // 用到什么公共lib（例如React.js），就把它加进vender去，目的是将公用库单独提取打包
+            // 公共lib（如React.js）,将公用库单独提取打包
             'base': ['base'],
             'vender': [
                 'jquery', 'slide'
             ]
-            // 'reactStuff': 'assets/dll/js/reactStuff.js'
         }),
         output: {
             path: assets,
@@ -229,12 +200,8 @@ module.exports = (options) => {
                 },
                 {
                     test: /\.(ejs|tpl)$/,
-                    loader: 'ejs-loader?variable=data'
+                    loader: 'ejs'
                 },
-                // {
-                // test: /\.html$/,
-                // loader: "html?-minimize"    //避免压缩html,https://github.com/webpack/html-loader/issues/50
-                // },
                 {
                   test: /\.json$/,
                   loader: "json"

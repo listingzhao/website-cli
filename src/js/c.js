@@ -1,15 +1,9 @@
-/*
-* @Author: dmyang
-* @Date:   2015-08-31 21:17:45
-* @Last Modified by:   dmyang
-* @Last Modified time: 2016-03-28 09:48:22
-*/
-
 'use strict';
 
 console.info('require page c.');
 
-import 'commonCss'
+// import 'commonCss'
+require('commonCss')
 import '../scss/c.scss'
 
 let $ = require('zepto')

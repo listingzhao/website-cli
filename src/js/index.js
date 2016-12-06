@@ -1,8 +1,6 @@
 'use strict';
 
-console.log('index.js');
-
-require('../less/index.less');
+import '../less/index.less'
 
 let $ = require('jquery'),
     validate = require("./utils/validate"),
