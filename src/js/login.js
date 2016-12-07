@@ -83,9 +83,8 @@ $('.j-checkbox-box').on('click', function() {
 			}else{
 				self.siblings('.help-block').text("").hide()
 				$.ajax({
-					url: Base.domain + "/passport/existUserByEmail.html",
+					url: "/api/passport/existUserByEmail",
 					type: "post",
-					async: false,
 					data: {
 						column: value
 					},
@@ -150,7 +149,7 @@ $('.j-checkbox-box').on('click', function() {
       $email.closest('.form-group').addClass('has-error')
 			return false;
 		}
-		if (!email.test(emailValue)) {
+		if (!methods.isEmail(emailValue)) {
       $email.siblings('.help-block').text("请您输入正确的邮箱地址").show()
       $email.closest('.form-group').addClass('has-error')
 			return false;

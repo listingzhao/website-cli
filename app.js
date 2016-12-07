@@ -24,9 +24,13 @@ var webpackConfig = process.env.NODE_ENV === 'testing'
   : require('./bin/webpack.dev.conf')
 var compiler = webpack(webpackConfig)
 
-// const staticDir = path.resolve(__dirname, '../' + (dev ? 'src' : 'assets'))
+const staticDir = path.resolve(__dirname, (dev ? 'src/views' : 'assets'))
 
-var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
+if(dev) {
+  var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
+}else {
+  var staticPath = path.posix.join(config.build.assetsRoot, config.build.assetsPublicPath)
+}
 
 // load routes
 const routes = require('./routers/routes')
@@ -75,7 +79,7 @@ app.use(function * (next) {
 })
 
 // use routes
-routes(router, app, staticPath)
+routes(router, app, staticDir)
 app.use(router.routes())
 
 if (dev) {

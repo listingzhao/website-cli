@@ -31,8 +31,13 @@ module.exports = (router, app, staticDir) => {
 
     // proxy api
 
-    router.post('/passport/existUserByEmail.html', proxy({url: 'http://192.168.30.72:8080/mfkj-web/passport/existUserByEmail.html'}));
+    router.post('/api/passport/existUserByEmail', proxy({url: "http://192.168.30.72:8080/mfkj-web/passport/existUserByEmail.html"}));
 
+    // login
+    router.post('/api/passport/login', proxy({url: "http://192.168.30.72:8080/mfkj-web/passport/login.html"}), function* (next){
+      yield console.log(this)
+      yield next
+    })
 
     let env = process.argv[2] || process.env.NODE_ENV
     let dev = 'production' !== env
@@ -55,6 +60,7 @@ module.exports = (router, app, staticDir) => {
         });
 
         console.log('router get /')
+        pages = ['home','products/packet','products/wallet']
 
         yield this.render('home0', {pages: pages || []});
     });
@@ -101,7 +107,7 @@ module.exports = (router, app, staticDir) => {
     })
 
     router.get('/login', function *(){
-      yield this.render('login')
+      yield this.render('login', {errmsg: ''})
     })
 
     router.get('/email-reg', function *(){

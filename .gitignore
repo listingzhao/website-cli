@@ -1,6 +1,6 @@
 /node_modules
-/dist
 /public
+/dist
 /views
 /.sass-cache
 ./npm-debug.log
